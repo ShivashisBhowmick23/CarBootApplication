@@ -1,7 +1,6 @@
 package com.boot.car.service;
 
 import com.boot.car.model.Car;
-import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,5 +23,5 @@ public interface CarService {
 
     public List<Car> countCarName(String carName);
 
-
+    String deleteCarById(String carId);
 }

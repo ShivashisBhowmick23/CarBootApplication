@@ -74,6 +74,12 @@ public class CarController {
         return carServiceImpl.countCarName(carName);
 
     }
+
+    @DeleteMapping("/deleteCar/{carId}")
+    public String deleteCarById(@PathVariable String carId) {
+        logger.info("car deleted from the database with carID: " + carId);
+        return carServiceImpl.deleteCarById(carId);
+    }
 }
 
 

@@ -106,10 +106,17 @@ public class CarServiceImpl implements CarService {
 
         List<Car> CarCountList = jdbcTemp.query("SELECT * FROM cartable WHERE carName = ?", new BeanPropertyRowMapper<Car>(Car.class), carName);
         long carCount = CarCountList.stream().count();
-        logger.debug("Number of "+carName+" in the showroom: "+carCount);
+        logger.debug("Number of " + carName + " in the showroom: " + carCount);
         return CarCountList;
 
 
+    }
+
+    @Override
+    public String deleteCarById(String carId) {
+        logger.debug("deleteCarById method executed");
+        jdbcTemp.update("DELETE FROM cartable WHERE carId=?", carId);
+        return "Car Deleted from the showroom: "+carId;
     }
 }
 
