@@ -80,6 +80,14 @@ public class CarController {
         logger.info("car deleted from the database with carID: " + carId);
         return carServiceImpl.deleteCarById(carId);
     }
+@GetMapping("/findCar/carColor/{carColor}")
+    public List<Car> findCarsByColor(@PathVariable String carColor) throws InterruptedException {
+        logger.info("Finding from Database...");
+        Thread.sleep(1000);
+        logger.info("Please wait...");
+        return carServiceImpl.findCarByColor(carColor);
+    }
 }
+
 
 

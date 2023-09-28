@@ -30,7 +30,7 @@ public class CarServiceImpl implements CarService {
     public Car addCar(Car car) {
 
         if (car.getCarId() != null) {
-            jdbcTemp.update("INSERT INTO cartable(carId,carName,carModel,carType,carPrice,userRating) VALUES(?, ?, ?, ?, ? ,?)", car.getCarId(), car.getCarName(), car.getCarModel(), car.getCarType(), car.getCarPrice(), car.getUserRating());
+            jdbcTemp.update("INSERT INTO cartable(carId,carName,carModel,carType,carPrice,userRating,carColor) VALUES(?, ?, ?, ?, ? ,?,?)", car.getCarId(), car.getCarName(), car.getCarModel(), car.getCarType(), car.getCarPrice(), car.getUserRating(),car.getCarColor());
 
             logger.debug("car added successfully");
         } else logger.debug("null value exists");
@@ -116,7 +116,16 @@ public class CarServiceImpl implements CarService {
     public String deleteCarById(String carId) {
         logger.debug("deleteCarById method executed");
         jdbcTemp.update("DELETE FROM cartable WHERE carId=?", carId);
-        return "Car Deleted from the showroom: "+carId;
+        return "Car Deleted from the showroom: " + carId;
+    }
+
+    @Override
+    public List<Car> findCarByColor(String carColor) throws InterruptedException {
+        List<Car> carColorList = jdbcTemp.query("SELECT * FROM cartable WHERE carColor = ?", new BeanPropertyRowMapper<Car>(Car.class), carColor);
+        logger.debug("Finding cars....");
+        Thread.sleep(3000);
+        logger.debug("Found some cars of color:: "+carColor);
+        return carColorList;
     }
 }
 

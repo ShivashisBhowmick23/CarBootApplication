@@ -15,5 +15,6 @@ public class Car {
     private double carPrice;
 
     private int userRating;
-    private int totalCars;
+    private String carColor;
+
 }

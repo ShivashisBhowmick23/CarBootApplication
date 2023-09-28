@@ -24,4 +24,7 @@ public interface CarService {
     public List<Car> countCarName(String carName);
 
     String deleteCarById(String carId);
+
+    List<Car> findCarByColor(String carColor) throws InterruptedException;
+
 }
