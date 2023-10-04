@@ -21,7 +21,7 @@ public class CarController {
     @PostMapping("/addCar")
     public Car addCar(@RequestBody Car car) {
 
-        logger.info("Car added: " + car.getCarName());
+  logger.info("Car added: " + car.getCarName());
         return carServiceImpl.addCar(car);
 
     }

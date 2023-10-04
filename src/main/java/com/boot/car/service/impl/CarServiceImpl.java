@@ -4,11 +4,14 @@ import com.boot.car.model.Car;
 import com.boot.car.service.CarService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.core.env.Environment;
+
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +28,9 @@ public class CarServiceImpl implements CarService {
         super();
         this.jdbcTemp = jdbcTemp;
     }
+@Autowired
+ Environment environment;
+
 
     @Override
     public Car addCar(Car car) {
@@ -32,7 +38,7 @@ public class CarServiceImpl implements CarService {
         if (car.getCarId() != null) {
             jdbcTemp.update("INSERT INTO cartable(carId,carName,carModel,carType,carPrice,userRating,carColor) VALUES(?, ?, ?, ?, ? ,?,?)", car.getCarId(), car.getCarName(), car.getCarModel(), car.getCarType(), car.getCarPrice(), car.getUserRating(),car.getCarColor());
 
-            logger.debug("car added successfully");
+            logger.debug("car added successfully"+environment.getProperty("local.server.port"));
         } else logger.debug("null value exists");
         return car;
     }
